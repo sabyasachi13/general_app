@@ -1,0 +1,254 @@
+const app= {
+    title :"check1",
+    subtitle : "check2",
+    options : ['one','two']
+};
+const appRoot=document.getElementById("app");
+
+const onFormSubmit=(e)=>{
+    e.preventDefault();
+    const option = e.target.elements.option.value;
+    if(option){
+        options.push(option);
+        e.target.elements.option.value="";
+        render();
+    }
+}
+
+const onRemoveAll=()=>{
+    app.options=[];
+    render();
+}
+const render=()=>{
+    const template =(
+        <div>
+            <h1>{app.title}</h1>
+            {(app.subtitle) && <p>app.subtitle</p>}
+            <p>{app.options.length > 0 ? "Here are you options":"No Options"}</p>
+            <button onClick={onRemoveAll}>Remove all</button>
+            <ol>
+            {
+                app.options.map( (option)=>{
+                    return <li key={option }>{option}</li>;
+                }
+                )
+            }
+            </ol>
+            //call the reference not the whole function
+            <form onSubmit={onFormSubmit}>
+                <input type ="text" name ="option"></input>
+                <button>Add Option</button>
+                
+            </form>
+        </div>
+    );
+    
+    ReactDom.render(template,app);
+    
+};
+
+render();
+
+
+const minusOne=()=>{
+    console.log("minus one");
+};
+const reset=()=>{
+    console.log("reset");
+};
+<button onClick={minusOne}>-1</button>;
+<button onClick={reset}>reset</button>;
+
+
+// for playground of visiblity toggle
+let toggle =false;
+const onToggle=()=>{
+    toggle= !toggle;
+    render1();
+}
+const render1=()=>{
+    const template1 = (
+        <div>
+            <h1>Visibilty Toggle</h1>
+            <button onClick={onToggle}>
+                {toggle ? "Hide detaisl " : "Show details"}
+            </button>
+            {toggle && <p>hello am coming</p>}
+        </div>
+    );
+    ReactDom.render(template,app);
+};
+
+
+
+class Person {
+    constructor(name="Anonymous",age =0){
+        this.name=name ;
+        this.age =age;
+    }
+    getGreetings(){
+        return `Hi , I am  ${this,name}`;
+    }
+    getDescription(){
+        return `${this.name} is ${this.age} years old.`;
+    }
+}
+
+
+class Traveler extends Person{
+    constructor(name,age,homeLocation){
+        super(name,age);
+        this.homeLocation=homeLocation;
+    }
+    hasLocation(){
+        return !!this.homeLocation;
+    }
+    getGreetings(){
+        let oldGreeting=super.getGreetings();
+        if(this.hasLocation()){
+             oldGreeting+= ` I am visiting from ${this.homeLocation}`;
+        }
+        return oldGreeting;
+    }
+}
+
+const me= new Person("sabyasachi",28);
+
+let options =["1","2","3"];
+<Options options={options}/>
+class Options extends React.Component {
+    handleRemoveAll(){
+        alert("remove all");
+    }
+    render(){
+        return (
+            <div>
+                <button onClick={this.handleRemoveAll}>Remove All</button>
+                {
+                    this.props.options.map(option => <Option key = {option} optionText={option}/>)
+                }
+               <Option />
+            </div>
+        );
+    }
+}
+
+class Option extends React.Component{
+    render() {
+        
+        return (
+            <div> 
+                <p key={this.props.optionText}> {this.props.optionText}</p>
+            </div>
+        )
+    }
+}
+
+
+class AddOption extends React.Component{
+    handleAddOption(e){
+        e.preventDefault();
+        let val = e.target.element.textInput.value;
+        if(val){
+           alert("i am coming");
+        }
+    }
+    render(){
+        return(
+            <div>
+                <form onSubmit={this.handleAddOption}>
+                    <input type="text" name="textInput"></input>
+                    <button>Add Option</button>
+                </form>
+            </div>
+        );
+    }
+}
+
+
+
+class Counter extends React.Component{
+    constructor(props){
+        super(props);
+        this.handleAddOne=this.handleAddOne.bind(this);
+        this.handleMinusOne=this.handleMinusOne.bind(this);
+        this.handleReset=this.handleReset.bind(this);
+        this.state={
+            count:0
+        }
+    }
+    handleAddOne(){
+        console.log("1");
+        this.setState( (prevState) =>{
+            return{
+                count : prevState+1
+            };
+        });
+    }
+    handleMinusOne(){
+        console.log("2");
+        this.setState((prevState)=>{
+            return{
+                count: prevState-1
+            };
+        });
+    }
+    handleReset(){
+        console.log("3");
+    }
+    render(){
+        return(
+            <div>
+                <h1>Count:</h1>
+                <button onClick={this.handleAddOne}>+1</button>
+                <button onClick={this.handleMinusOne}>-1</button>
+                <button onClick={this.handleReset}>reset</button>
+            </div>
+        )
+    }
+}
+
+class Visibility extends React.component{
+    constructor(props){
+        super(props);
+        this.onToggle=this.onToggle.bind(this);
+        this.state={
+            toggle:false
+        }
+    }
+    onToggle(){
+        this.setState((prevState)=>{
+            toggle: !prevState.toggle
+        });
+    }
+
+    render(){
+
+        return (
+        <div>
+            <h1>Visibilty Toggle</h1>
+            <button onClick={this.onToggle}>
+                {this.state.toggle ? "Hide detaisl " : "Show details"}
+            </button>
+            {this.state.toggle && <p>hello am coming</p>}
+        </div>
+        )
+    }
+        
+}
+
+componentDidMount(){
+    try{
+        const json =loca
+    }
+}
+
+<button onClick={check1}>
+
+check1 =()=>{
+    this.setState(()=> {
+        selectedoptions:undefinded
+    } )
+}
+
+
