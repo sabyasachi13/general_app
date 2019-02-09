@@ -35,3 +35,35 @@ export const editExpense =(id,updates)=>({
     id,
     updates
 });
+
+export const setExpenses=(expenses)=>({
+    type:"SET_EXPENSES",
+    expenses
+});
+
+
+export const startSetExpenses =()=>{
+    return(dispatch)=>{       
+        return database.ref('expenses').once('value').then((snapshot)=>{
+            const expenses=[];
+            snapshot.forEach((childSnapshot)=>{
+                expenses.push({
+                    id:childSnapshot.key,
+                    ...childSnapshot.val()
+                });
+            });
+            dispatch(setExpenses(expenses))
+        })
+    }
+}
+//database.ref().remove().then(()=>{
+    //     console.log("successfully removed")
+    // }).catch((e)=>{
+
+export const startRemoveExpense=({id}={})=>{
+    return (dispatch)=>{
+       return  database.ref(`expenses/${id}`).remove().then(()=>{
+            dispatch(removeExpense({id}));
+        })
+    }
+}
