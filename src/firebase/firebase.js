@@ -12,7 +12,13 @@ const config = {
 firebase.initializeApp(config);
 const database =firebase.database();
 
-export {firebase, database as default};
+const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+// this is added by me in extra to select the account 
+googleAuthProvider.setCustomParameters({ 'prompt': 'select_account' });
+
+export {firebase,googleAuthProvider, database as default};
+
+
 
 // database.ref('expenses')
 //   .on("value",(snapshot)=>{
